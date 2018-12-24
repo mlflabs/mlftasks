@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Categories</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+      <ion-item *ngFor="let item of items" (click)="selectedItem(item)">
+        <ion-icon [name]="item.icon" slot="start"></ion-icon>
+        {{item.title}}
+        <!--
+        <div class="item-delete" slot="end">
+          <ion-button (click)="removeItem(item)" shape="round" color="danger" fill="outline">Remove</ion-button>
+        </div>
+        -->
+      </ion-item>
+    </ion-list>
+    
+    <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="add()" >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>

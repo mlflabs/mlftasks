@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list padding>
+    <ion-item *ngFor="let item of items">
+      <ion-icon  (click)="taskChecked(item)" [name]="printDone(item.done)" color="secondary" slot="start"></ion-icon>
+      <div class="test" width="100%">
+          <ion-text (click)="selectedItem(item)" color="{{printDoneColor(item.done, item.title)}}">
+            {{printTitle(item.title)}}  </ion-text>
+          <br/>
+          <ion-text (click)="selectedItem(item)" *ngIf="item.note" position="stacked" color="medium"  >
+            <sub>{{item.note}}</sub></ion-text> 
+    </div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-icon slot="icon-only" color="primary" name="add"></ion-icon>
+          </ion-buttons>
+        
+        <ion-input  id="newTask"
+                clearInput="true"
+                name="newTask"
+                [(ngModel)]="newTask" 
+                type="text" 
+                (ionFocus)="newTaskFocus()"
+                (ionBlur)="newTaskBlur()"
+                (keypress)="newTaskKeyInput($event)"
+                placeholder="Add new task"></ion-input>
+    </ion-toolbar>
+</ion-footer>

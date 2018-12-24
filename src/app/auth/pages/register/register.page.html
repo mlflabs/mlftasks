@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+          <div text-center>
+            <h4>Register</h4>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input  id="username" 
+                          name="username"
+                          #username="ngModel"
+                          [(ngModel)]="user.username" 
+                          type="text" 
+                          required
+                          placeholder="Username"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input  id="email"
+                          name="email"
+                          #email="ngModel"
+                          [(ngModel)]="user.email" 
+                          type="text" 
+                          required
+                          email
+                          placeholder="Email"></ion-input>
+            </ion-item>
+    
+            <ion-item>
+              <ion-input  id="password"
+                          name="password"
+                          #password="ngModel"
+                          [(ngModel)]="user.password" 
+                          type="password" 
+                          required
+                          placeholder="Password"></ion-input>
+            </ion-item>
+              <ion-label position="stacked" *ngIf="!username.valid && !username.pristine" color="danger">
+                  Username is required
+              </ion-label>
+              <ion-label position="stacked" *ngIf="!email.valid && !email.pristine" color="danger">
+                    Valid email is required
+              </ion-label>
+              <ion-label position="stacked" *ngIf="!password.valid && !password.pristine" color="danger">
+                      Password is required
+              </ion-label>
+              <ion-label position="stacked" *ngIf="errors != ''" color="danger">
+                      {{errors}}
+              </ion-label>
+          </div>
+    
+          <div padding>
+            <ion-spinner slot="middle" name="dots" color="primary" *ngIf="isLoading" ></ion-spinner>
+            <ion-button type="submit" size="large" [disabled]="!userForm.valid" expand="block">Register</ion-button>
+            <ion-button (click)="login()" size="large"  expand="block">Login</ion-button>
+            
+          </div>
+        </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

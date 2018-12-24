@@ -11,14 +11,24 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of items">
+    <ion-item *ngFor="let item of items" (click)="selectedItem2(item)">
       <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
+      {{item.text}}
+      <div class="item-delete" slot="end">
+        <ion-button (click)="removeItem(item)" shape="round" color="danger" fill="outline">Remove</ion-button>
       </div>
     </ion-item>
   </ion-list>
+  {{item._id}}
+  <ion-item>
+    <ion-input  id="text"
+                name="text"
+                [(ngModel)]="item.text" 
+                type="text" 
+                placeholder="Text"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="saveItem()"  expand="block">Save</ion-button>
   <!--
     <div *ngIf="selectedItem" padding>
       You navigated here from <b>{{selectedItem.title }}</b>

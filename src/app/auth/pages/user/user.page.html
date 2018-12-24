@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>user</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+      <ion-item>
+          Name:
+          <div  slot="end">
+           {{user.username}}
+          </div>
+      </ion-item>
+      <ion-item>
+          Email: 
+          <div  slot="end">
+           {{user.email}}
+          </div>
+      </ion-item>
+    </ion-list>
+    <ion-button size="large" (click)="logout()" expand="block">Logout</ion-button>
+</ion-content>
