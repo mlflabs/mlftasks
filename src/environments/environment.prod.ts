@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   token_expiery: 300, // how many days
-  auth_api: 'http://localhost:3005',
-  couch_db: 'localhost:9001'
+  auth_api: 'https://auth.mlflabs.com',
+  couch_db: 'https://tasks.mlflabs.com/mlftasks'
 };

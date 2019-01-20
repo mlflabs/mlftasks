@@ -86,6 +86,7 @@ export class AppComponent {
   }
 
   async loadMenu(){
+    console.log(':::LOAD MENU::: ');
     // lets now load all our categories
     const cats = await this.dataService.getAllByType(TYPE_CATEGORIES);
     console.log('Categories', cats);

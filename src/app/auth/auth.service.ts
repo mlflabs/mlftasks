@@ -149,12 +149,12 @@ export class AuthService {
 
       console.log('RenewToken:  ', res);
       this.saveCredentials(res);
-        //const user = await this.saveCredentials(res);
-        //console.log('Login res: ', res, user);
-        //return createAuthEvent(true, 1, user);
+        // const user = await this.saveCredentials(res);
+        // console.log('Login res: ', res, user);
+        // return createAuthEvent(true, 1, user);
 
 
-      //TODO renew token here
+      // TODO renew token here
 
       // const authEvent = await this.feathers.renewJWT(token);
 
