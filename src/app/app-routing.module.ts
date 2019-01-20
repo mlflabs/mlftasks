@@ -32,11 +32,11 @@ const routes: Routes = [
   { path: 'important',
     loadChildren: './pages/todo/tasks/tasks.module#TasksPageModule',
     data: { type: 'important', title: 'Important', icon: 'star'}},
-  { path: 'tasksCategory/:id',
+  { path: 'tasksCategory/:id', // TODO: see if its still in use
     loadChildren: './pages/todo/tasks/tasks.module#TasksPageModule',
     data: { type: 'category'}},
   { path: 'tasks/:id', loadChildren: './pages/todo/tasks/tasks.module#TasksPageModule',
-    data: { test: 'testdfdrerd'} },
+    data: { type: 'category'} },
 
   { path: 'categories', loadChildren: './pages/todo/categories/categories.module#CategoriesPageModule' },
   { path: 'category',loadChildren: './pages/todo/category/category.module#CategoryPageModule' },

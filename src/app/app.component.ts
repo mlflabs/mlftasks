@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DataService, TYPE_CATEGORIES } from './services/data.service';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
+import { first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -86,6 +87,12 @@ export class AppComponent {
   }
 
   async loadMenu(){
+    this.dataService.waitForReady().subscribe(async ready =>{
+      this._loadMenu();
+    });
+  }
+
+  async _loadMenu(){
     console.log(':::LOAD MENU::: ');
     // lets now load all our categories
     const cats = await this.dataService.getAllByType(TYPE_CATEGORIES);
@@ -112,7 +119,7 @@ export class AppComponent {
     const sub = this.dataService.subscribeCollectionChanges(TYPE_CATEGORIES, 1000)
       .subscribe( async doc => {
         console.log('RELOADING SUB MENU@@@@@@@@@@@@@@@');
-        this.loadMenu();
+        this._loadMenu();
       });
 
     const auth = this.authService.isAuthenticated$.subscribe(change => {

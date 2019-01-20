@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
 import { Observable, fromEvent, Subject } from 'rxjs';
-import { map, debounceTime, filter } from 'rxjs/operators';
+import { map, debounceTime, filter, first } from 'rxjs/operators';
 import { Doc } from '../models';
 import { generateCollectionId } from '../utils';
 import { promise } from '../../../node_modules/protractor';
@@ -24,6 +24,8 @@ PouchDB.plugin(PouchDBFind);
 export class DataService {
 
   private _pouch: any;
+  private _pouchReady;
+  public ready = false;
   private _changes;
   private _user;
   private _token;
@@ -39,6 +41,7 @@ export class DataService {
     console.log('Hello DataService');
 
     this._changes = new Subject();
+    this._pouchReady = new Subject();
 
     this.platform.ready().then(() => {
       this._user = authService.user;
@@ -63,6 +66,14 @@ export class DataService {
   }
 
 
+  waitForReady(): Observable<any> {
+    // let others know are datasource is ready
+    return this._pouchReady.asObservable().pipe(first());
+    if(this.ready === true){
+      this._pouchReady.next(true);
+    }
+
+  }
 
   subscribeChanges(): Observable<any> {
     console.log('Subscribing to changes');
@@ -264,29 +275,29 @@ export class DataService {
       olddocs = await this.getAllDocs();
     }
 
-    this._pouch = new PouchDB(pouchName, this._localPouchOptions);
+    this._pouch = await new PouchDB(pouchName, this._localPouchOptions);
 
-    this._pouch.createIndex({
+    await this._pouch.createIndex({
         index: {
           fields: ['category']
         }
     });
-    this._pouch.createIndex({
+    await this._pouch.createIndex({
         index: {
           fields: ['today']
         }
     });
-    this._pouch.createIndex({
+    await this._pouch.createIndex({
         index: {
           fields: ['important']
         }
     });
-    this._pouch.createIndex({
+    await this._pouch.createIndex({
         index: {
           fields: ['dueDate']
         }
     });
-    this._pouch.createIndex({
+    await this._pouch.createIndex({
         index: {
           fields: ['remindDate']
         }
@@ -333,6 +344,8 @@ export class DataService {
         this.save(doc);
       });
     }
+    this.ready = true;
+    this._pouchReady.next(true);
   }
 
 }
