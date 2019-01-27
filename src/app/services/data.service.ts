@@ -346,6 +346,30 @@ export class DataService {
     }
     this.ready = true;
     this._pouchReady.next(true);
+    this.createSettingsDoc();
+  }
+
+  async createSettingsDoc(){
+    console.log('%%%%%%% Create Settings Doc: ');
+    const settings = await this.getDoc('settings');
+    console.log('Settings:: ', settings);
+    if(!settings){
+      this.save({
+        _id: 'settings',
+        specialCollections:{
+          today: {
+            showCompleted: false
+          },
+          important: {
+            showCompleted: false
+          },
+          tasks: {
+            showCompleted: false
+          }
+        }
+      });
+    }
+
   }
 
 }

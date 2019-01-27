@@ -20,7 +20,9 @@
               <ion-input  id="username" 
                           name="username"
                           #username="ngModel"
+                          #inputName
                           [(ngModel)]="user.username" 
+                          (keypress)="keyPressNameInput($event)"
                           type="text" 
                           required
                           placeholder="Username"></ion-input>
@@ -30,6 +32,8 @@
               <ion-input  id="email"
                           name="email"
                           #email="ngModel"
+                          #inputEmail
+                          (keypress)="keyPressEmailInput($event)"
                           [(ngModel)]="user.email" 
                           type="text" 
                           required
@@ -40,6 +44,8 @@
             <ion-item>
               <ion-input  id="password"
                           name="password"
+                          (keypress)="keyPressPasswordInput($event)"
+                          #inputPassword
                           #password="ngModel"
                           [(ngModel)]="user.password" 
                           type="password" 

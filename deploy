@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+ionic build --release --prod
+cp -r ./www/* ./build
+cd build
+git add .
+git commit -m "update"
+git push origin

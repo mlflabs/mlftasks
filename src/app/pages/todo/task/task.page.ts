@@ -93,6 +93,8 @@ export class TaskPage implements OnInit, OnDestroy {
 
   taskChecked(){
     console.log('task checked');
+    this.item.done = !this.item.done;
+    // this.saveItem();
   }
 
   printDone(done){

@@ -1,6 +1,9 @@
 
     <ion-toolbar>
         <ion-buttons slot="start">
+            <ion-button (click)="close()"  >
+              <ion-icon name="arrow-back" ></ion-icon>
+            </ion-button>
             <ion-icon  (click)="taskChecked()" [name]="printDone(item.done)" 
               color="secondary" slot="start"></ion-icon>
         </ion-buttons>
@@ -12,9 +15,7 @@
               placeholder="Title"></ion-input>
 
         <ion-buttons slot="end">
-          <ion-button (click)="close()" >
-              <ion-icon slot="end" name="close"></ion-icon>
-          </ion-button>
+           
         </ion-buttons>
     </ion-toolbar>
 
@@ -46,12 +47,12 @@
           </ion-label>   
       </ion-item>
     </ion-list>
-      <!--
-      <ion-fab vertical="top" horizontal="end" mini edge slot="fixed">
-        <ion-fab-button>
-          <ion-icon name="add" mini></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-      -->
+     
+    <ion-fab vertical="bottom" horizontal="end" mini slot="fixed">
+      <ion-fab-button mini (click)="removeItem()">
+        <ion-icon name="trash" mini></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+      
     </ion-content>
     

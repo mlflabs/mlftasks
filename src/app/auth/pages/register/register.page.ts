@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,10 @@ export class RegisterPage implements OnInit {
     email: '',
     password: ''
   };
+
+  @ViewChild('inputName') inputName;
+  @ViewChild('inputEmail') inputEmail;
+  @ViewChild('inputPassword') inputPassword;
 
 
   constructor(public auth: AuthService,
@@ -48,8 +52,8 @@ export class RegisterPage implements OnInit {
           msg += e.msg + '. ';
         });
         this.errors = msg;
-        console.log(this.errors);
-        // this.presentToast(msg);
+        // console.log(this.errors);
+        this.presentToast(msg);
       }
     } catch (err) {
       console.log('register page ts, register, err', err);
@@ -71,4 +75,21 @@ export class RegisterPage implements OnInit {
     toast.present();
   }
 
+  keyPressNameInput(event){
+    if(event.code === 'Enter'){
+      this.inputEmail.setFocus();
+    }
+  }
+
+  keyPressEmailInput(event){
+    if(event.code === 'Enter'){
+      this.inputPassword.setFocus();
+    }
+  }
+
+  keyPressPasswordInput(event){
+    if(event.code === 'Enter'){
+      this.onSubmit();
+    }
+  }
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Category } from '../../../models';
 import { ModalController } from '@ionic/angular';
 import { TaskPage } from '../task/task.page';
+import { CategoryPage } from '../category/category.page';
 
 @Component({
   selector: 'app-tasks',
@@ -50,6 +51,8 @@ export class TasksPage implements OnInit, OnDestroy {
       this.category = await this.dataService.getDoc(catid);
       console.log('Category: ', this.category, catid);
       if(this.category == null) return;
+
+      this.title = 'Tasks: '+this.category.title;
 
       this.subscriptions[0] = this.dataService.subscribeCollectionChanges(TYPE_TASKS,1000)
         .subscribe(async doc => {
@@ -100,6 +103,14 @@ export class TasksPage implements OnInit, OnDestroy {
 
   }
 
+  async settings(){
+    console.log('Settings:: ', this.category);
+    const modal = await this.modalController.create({
+      component: CategoryPage,
+      componentProps: { item: {...{}, ...this.category}}
+    });
+    modal.present();
+  }
 
   async selectedItem(item){
     console.log('selectedItem', item);
